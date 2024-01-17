@@ -1,5 +1,7 @@
 # Sleeping Server Stopper
-This mod is a port of the Sleeping Server Stopper Spigot plugin for Forge 1.20 (Haven't checked other versions. Might work).
+This mod is a port of the [Sleeping Server Stopper Spigot plugin](https://github.com/vincss/mcEmptyServerStopper) for Forge 1.20 (Haven't checked other versions. Might work).
+
+This is meant to be used with the mod [SleepingServerStarter](https://github.com/vincss/mcsleepingserverstarter) by [vincss](https://github.com/vincss).
 
 > ⚠ NOTE ⚠
 > 
