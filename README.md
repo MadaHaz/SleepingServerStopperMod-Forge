@@ -6,7 +6,7 @@ This is meant to be used with the mod [SleepingServerStarter](https://github.com
 ## 🤝 Contributers
 Author: [MadaHaz](https://github.com/MadaHaz)
 
-I'm basing my mod off of another port which has been archived, [EmptyServerStopper](https://github.com/GHYAKIMA/emptyserverstopper-mod) by [GHYAKIMA](https://github.com/GHYAKIMA). I couldn't properly fork his project so I decided to remake it myself and add some features.
+I'm basing my mod off of another port which has been archived, [EmptyServerStopper](https://github.com/GHYAKIMA/emptyserverstopper-mod) by [GHYAKIMA](https://github.com/GHYAKIMA). I couldn't properly fork their project, they had some dual development setup for both Fabric and Forge, couldn't make any sense of it, so I decided to remake it myself and add some features.
 
 ## 🛠 TODO
 - Add config file.
