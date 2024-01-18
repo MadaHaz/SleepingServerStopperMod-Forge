@@ -9,7 +9,7 @@ Author: [MadaHaz](https://github.com/MadaHaz)
 I'm basing my mod off of another port which has been archived, [EmptyServerStopper](https://github.com/GHYAKIMA/emptyserverstopper-mod) by [GHYAKIMA](https://github.com/GHYAKIMA). I couldn't properly fork their project, they had some dual development setup for both Fabric and Forge, couldn't make any sense of it, so I decided to remake it myself and add some features.
 
 ## 🛠 TODO
-- Add config file.
+- ~~Add config file.~~ DONE
 
 ## 📄 Versions
 - v2.0.0
