@@ -1,38 +1,17 @@
 package net.madahaz.sleepingserverstoppermod;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.api.distmarker.Dist;
+import net.madahaz.sleepingserverstoppermod.config.SleepingServerStopperModCommonConfig;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.NetworkConstants;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.slf4j.Logger;
 
 import java.util.Timer;
@@ -47,13 +26,15 @@ public class SleepingServerStopperMod {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final int shutdownTime = 2;
-    private static final boolean startServer = false;
+    private static int shutdownTime;
+    private static boolean shutdownOnLaunch;
     private static MinecraftServer server;
     private static Timer timer;
 
     public SleepingServerStopperMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SleepingServerStopperModCommonConfig.SPEC, "sleepingserverstoppermod-common.toml");
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -63,12 +44,18 @@ public class SleepingServerStopperMod {
     @SubscribeEvent
     public void onServerStarted(ServerStartedEvent event) {
         onServerStart(event.getServer());
+        shutdownTime = SleepingServerStopperModCommonConfig.SHUTDOWN_TIME_IN_MINUTES.get();
+        shutdownOnLaunch = SleepingServerStopperModCommonConfig.SHUTDOWN_SERVER_ON_LAUNCH.get();
+        LOGGER.info("[SSS] TIME = " + shutdownTime);
+        LOGGER.info("[SSS] BOOL = " + shutdownOnLaunch);
     }
 
     // Server stopping Event.
     @SubscribeEvent
     public void onServerStopping(ServerStoppingEvent event) {
-        timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
     // Player joining Event.
@@ -88,7 +75,7 @@ public class SleepingServerStopperMod {
     public static void onServerStart(MinecraftServer server) {
         SleepingServerStopperMod.server = server;
 
-        if (!startServer) {
+        if (shutdownOnLaunch) {
             countPlayers();
         }
     }
