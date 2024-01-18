@@ -3,10 +3,6 @@ This mod is a port of the [Sleeping Server Stopper Spigot plugin](https://github
 
 This is meant to be used with the mod [SleepingServerStarter](https://github.com/vincss/mcsleepingserverstarter) by [vincss](https://github.com/vincss).
 
-> ⚠ NOTE ⚠
-> 
-> This project is a work in progress.
-
 ## 🤝 Contributers
 Author: [MadaHaz](https://github.com/MadaHaz)
 
@@ -16,6 +12,14 @@ I'm basing my mod off of another port which has been archived, [EmptyServerStopp
 - Add config file.
 
 ## 📄 Versions
+- v2.0.0
+  - Forge 1.20.1 (Will probably work on other versions. Haven't checked.)
+  - Coded in Forge 1.20.1 47.2.0.
+  - Config File is generated. Values that can be changed are:
+    - SHUTDOWN_TIME_IN_MINUTES - How many minutes until the server closes. (Minimum is 1 minute!)
+    - SHUTDOWN_SERVER_ON_LAUNCH - Should the server shutdown on launch?
+  - Default config values are (2, true).
+  - Fixed 2 minor bugs.
 - v1.0.0
   - Forge 1.20.1 (Will probably work on other versions. Haven't checked.)
   - Coded in Forge 1.20.1 47.2.0.
