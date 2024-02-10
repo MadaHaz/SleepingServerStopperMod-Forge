@@ -26,8 +26,8 @@ public class SleepingServerStopperMod {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static int shutdownTime;
-    private static boolean shutdownOnLaunch;
+    private int shutdownTime;
+    private boolean shutdownOnLaunch;
     private static MinecraftServer server;
     private static Timer timer;
 
@@ -43,11 +43,9 @@ public class SleepingServerStopperMod {
     // Server started Event.
     @SubscribeEvent
     public void onServerStarted(ServerStartedEvent event) {
-        onServerStart(event.getServer());
         shutdownTime = SleepingServerStopperModCommonConfig.SHUTDOWN_TIME_IN_MINUTES.get();
         shutdownOnLaunch = SleepingServerStopperModCommonConfig.SHUTDOWN_SERVER_ON_LAUNCH.get();
-        LOGGER.info("[SSS] TIME = " + shutdownTime);
-        LOGGER.info("[SSS] BOOL = " + shutdownOnLaunch);
+        onServerStart(event.getServer());
     }
 
     // Server stopping Event.
@@ -72,7 +70,7 @@ public class SleepingServerStopperMod {
 
     // METHODS
 
-    public static void onServerStart(MinecraftServer server) {
+    public void onServerStart(MinecraftServer server) {
         SleepingServerStopperMod.server = server;
 
         if (shutdownOnLaunch) {
@@ -80,7 +78,7 @@ public class SleepingServerStopperMod {
         }
     }
 
-    public static void countPlayers() {
+    public void countPlayers() {
         if (server.getPlayerCount() <= 1) {
             LOGGER.info(String.format("[SSS] Server Empty - Server will shutdown in %d minute(s)!", shutdownTime));
             TimerTask task = new TimerTask() {
