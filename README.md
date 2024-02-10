@@ -17,12 +17,18 @@ I'm basing my mod off of another port which has been archived, [EmptyServerStopp
 An issue came up where versions before 1.20.1 aren't working, most likely because the mod was coded using Forge 47.2.0. I will attempt to remake the mod for any other version that is requested (Just open up an issue) since the mod really isn't that hard to make, but I can't exactly upload it onto github since the files would clash (may upload later).
 
 ## 📄 Versions
-- v2.0.0-1.19
+- **v3.0.0-1.20.1**
+  - Forge 1.20.1
+  - Coded in Forge 1.20.1 47.2.0.
+  - Features
+    - Config File
+  - Config files "shutdownOnLaunch" value now works.
+- **v2.0.0-1.19**
   - Forge 1.19
   - Coded in Forge 1.19 41.1.0
   - Features
     - Config File
-- v2.0.0-1.20.1
+- **v2.0.0-1.20.1**
   - Forge 1.20.1
   - Coded in Forge 1.20.1 47.2.0.
   - Config File is generated. Values that can be changed are:
@@ -30,7 +36,7 @@ An issue came up where versions before 1.20.1 aren't working, most likely becaus
     - SHUTDOWN_SERVER_ON_LAUNCH - Should the server shutdown on launch?
   - Default config values are (2, true).
   - Fixed 2 minor bugs.
-- v1.0.0-1.20.1
+- **v1.0.0-1.20.1**
   - Forge 1.20.1
   - Coded in Forge 1.20.1 47.2.0.
   - Hard coded values. 2 minute timer and the server will close on startup.
