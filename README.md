@@ -1,5 +1,7 @@
 # Sleeping Server Stopper
-This mod is a port of the [Sleeping Server Stopper Spigot plugin](https://github.com/vincss/mcEmptyServerStopper) for Forge 1.20 (Haven't checked other versions. Might work).
+This mod is a port of the [Sleeping Server Stopper Spigot plugin](https://github.com/vincss/mcEmptyServerStopper) for:
+- Forge 1.20
+- Forge 1.19
 
 This is meant to be used with the mod [SleepingServerStarter](https://github.com/vincss/mcsleepingserverstarter) by [vincss](https://github.com/vincss).
 
@@ -9,12 +11,13 @@ Author: [MadaHaz](https://github.com/MadaHaz)
 I'm basing my mod off of another port which has been archived, [EmptyServerStopper](https://github.com/GHYAKIMA/emptyserverstopper-mod) by [GHYAKIMA](https://github.com/GHYAKIMA). I couldn't properly fork their project, they had some dual development setup for both Fabric and Forge, couldn't make any sense of it, so I decided to remake it myself and add some features.
 
 ## 🛠 TODO
-- ~~Add config file.~~ DONE
-- Support more Forge versions.
-- Clean up files in repo (Organise folders into versions?)
+- ~~Add config file.~~ **DONE**
+- ~~Clean up files in repo (Organise folders into versions?)~~ **DONE**
+- Update 1.19 to v3.0.0
+- Finish 1.12.2 port.
 
 ## ⚠ NOTE ⚠
-An issue came up where versions before 1.20.1 aren't working, most likely because the mod was coded using Forge 47.2.0. I will attempt to remake the mod for any other version that is requested (Just open up an issue) since the mod really isn't that hard to make, but I can't exactly upload it onto github since the files would clash (may upload later).
+An issue came up where versions before 1.20.1 aren't working, most likely because the mod was coded using Forge 47.2.0. I will attempt to remake the mod for any other version that is requested (Just open up an issue) since the mod really isn't that hard to make.
 
 ## 📄 Versions
 - **v3.0.0-1.20.1**
