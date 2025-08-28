@@ -18,6 +18,14 @@ I'm basing my mod off of another port which has been archived, [EmptyServerStopp
 - Update 1.19 to v3.0.0
 - Finish 1.12.2 port.
 
+## Supported Versions
+| MC Version ↓ / Plugin Version → | **3.0.0** | **2.0.0** | **1.0.0** |
+| :-----------------------------: | :-------: | :-------: | :-------: |
+| 1.12.2                         |    🟡     |    ❌     |    ❌     |
+| 1.16.5                         |    ✅     |    ❌     |    ❌     |
+| 1.19                           |    ✅     |    ✅     |    ❌     |
+| 1.20.1                         |    ✅     |    ✅     |    ✅     |
+
 ## ⚠ NOTE ⚠
 An issue came up where versions before 1.20.1 aren't working, most likely because the mod was coded using Forge 47.2.0. I will attempt to remake the mod for any other version that is requested (Just open up an issue) since the mod really isn't that hard to make.
 
@@ -28,6 +36,9 @@ An issue came up where versions before 1.20.1 aren't working, most likely becaus
 - **v3.0.0-1.20.1**
   - Forge 1.20.1
   - Coded in Forge 1.20.1 47.2.0.
+- **v3.0.0-1.19**
+  - Forge 1.19
+  - Coded in Forge 1.19 41.1.0
 - **v2.0.0-1.19**
   - Forge 1.19
   - Coded in Forge 1.19 41.1.0

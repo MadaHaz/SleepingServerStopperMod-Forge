@@ -15,7 +15,7 @@ public class SleepingServerStopperModCommonConfig {
         SHUTDOWN_TIME_IN_MINUTES = BUILDER.comment("How many minutes until the server closes. (Minimum is 1 minute!)")
                 .define("Minutes", 2);
         SHUTDOWN_SERVER_ON_LAUNCH = BUILDER.comment("Should the server shutdown on launch?")
-                .define("Stop?",true);
+                .define("ShutdownOnLaunch",true);
 
         BUILDER.pop();
         SPEC = BUILDER.build();
