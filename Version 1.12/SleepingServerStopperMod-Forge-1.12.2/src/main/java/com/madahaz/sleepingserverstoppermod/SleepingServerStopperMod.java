@@ -1,9 +1,10 @@
 package com.madahaz.sleepingserverstoppermod;
 
+import com.madahaz.sleepingserverstoppermod.config.SleepingServerStopperModConfig;
 import com.madahaz.sleepingserverstoppermod.proxy.CommonProxy;
 import com.madahaz.sleepingserverstoppermod.util.Reference;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -11,8 +12,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Timer;
@@ -29,8 +28,8 @@ public class SleepingServerStopperMod
 
     private static Logger logger;
 
-    private int shutdownTime;
-    private boolean shutdownOnLaunch;
+    private static int shutdownTime;
+    private static boolean shutdownOnLaunch;
     private static MinecraftServer server;
     private static Timer timer;
 
@@ -38,22 +37,22 @@ public class SleepingServerStopperMod
     public void preInit(FMLPreInitializationEvent event)
     {
         logger = event.getModLog();
-    }
-
-    @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        // some example code
+        
+        // Initialize configuration
+        SleepingServerStopperModConfig.init(event.getSuggestedConfigurationFile());
+        
+        // Register event handlers
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     // Server started Event.
-    @Mod.EventHandler
-    public void onServerStart(FMLServerStartedEvent event) {
-//        shutdownTime = SleepingServerStopperModCommonConfig.SHUTDOWN_TIME_IN_MINUTES.get();
-//        shutdownOnLaunch = SleepingServerStopperModCommonConfig.SHUTDOWN_SERVER_ON_LAUNCH.get();
-        shutdownTime = 1;
-        shutdownOnLaunch = true;
+    @EventHandler
+    public void onServerStarted(FMLServerStartedEvent event) {
         onServerStart();
+        shutdownTime = SleepingServerStopperModConfig.SHUTDOWN_TIME_IN_MINUTES;
+        shutdownOnLaunch = SleepingServerStopperModConfig.SHUTDOWN_SERVER_ON_LAUNCH;
+        logger.info("[SSS] TIME = " + shutdownTime);
+        logger.info("[SSS] BOOL = " + shutdownOnLaunch);
     }
 
     // Server stopping Event.
@@ -66,19 +65,19 @@ public class SleepingServerStopperMod
 
     // Player joining Event.
     @SubscribeEvent
-    public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        onPlayerConection();
+    public void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent event) {
+        onPlayerJoin();
     }
 
     // Player leaving Event.
     @SubscribeEvent
-    public void onPlayerLeave(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event) {
+    public void onPlayerDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
         countPlayers();
     }
 
-    // Methods
+    // METHODS
 
-    public void onServerStart() {
+    public static void onServerStart() {
         SleepingServerStopperMod.server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
         if (shutdownOnLaunch) {
@@ -86,7 +85,7 @@ public class SleepingServerStopperMod
         }
     }
 
-    public void countPlayers() {
+    public static void countPlayers() {
         if (server.getCurrentPlayerCount() <= 1) {
             logger.info(String.format("[SSS] Server Empty - Server will shutdown in %d minute(s)!", shutdownTime));
             TimerTask task = new TimerTask() {
@@ -99,7 +98,7 @@ public class SleepingServerStopperMod
         }
     }
 
-    public static void onPlayerConection() {
+    public static void onPlayerJoin() {
         if (server.getCurrentPlayerCount() <= 1 & timer != null) {
             logger.info("[SSS] Player joined - Server shutdown cancelled.");
             timer.cancel();
@@ -114,7 +113,7 @@ public class SleepingServerStopperMod
             logger.info("[SSS] Server empty - Server shutting down.");
             server.initiateShutdown();
         } else {
-            logger.info(String.format("[SSS} Abort shutdown - %d connected player(s).", playerCount));
+            logger.info(String.format("[SSS] Abort shutdown - %d connected player(s).", playerCount));
         }
     }
 }
