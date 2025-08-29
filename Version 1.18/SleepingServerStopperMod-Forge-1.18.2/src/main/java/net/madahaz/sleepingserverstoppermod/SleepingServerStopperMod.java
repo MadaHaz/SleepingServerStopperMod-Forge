@@ -53,9 +53,11 @@ public class SleepingServerStopperMod
     // Server started Event.
     @SubscribeEvent
     public void onServerStarted(ServerStartedEvent event) {
+        onServerStart(event.getServer());
         shutdownTime = SleepingServerStopperModCommonConfig.SHUTDOWN_TIME_IN_MINUTES.get();
         shutdownOnLaunch = SleepingServerStopperModCommonConfig.SHUTDOWN_SERVER_ON_LAUNCH.get();
-        onServerStart(event.getServer());
+        LOGGER.info("[SSS] TIME = " + shutdownTime);
+        LOGGER.info("[SSS] BOOL = " + shutdownOnLaunch);
     }
 
 
